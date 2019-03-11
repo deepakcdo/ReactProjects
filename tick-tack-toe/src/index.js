@@ -5,9 +5,7 @@ import './index.css';
 function Square(props) {
     return (
         <button className="square"
-        // questions why doess this not work?
-            //  onClick={() =>console.log('yes')}>
-             onClick={props.onClick}> 
+            onClick={props.onClick}>
             {props.value}
         </button>);
 }
@@ -43,6 +41,7 @@ class Board extends React.Component {
 
 class Game extends React.Component {
 
+
     constructor(props) {
         super(props);
         this.state = {
@@ -51,28 +50,30 @@ class Game extends React.Component {
             }],
             stepNumber: 0,
             xIsNext: true,
+            lastSelectedButton : -1,
         };
     }
     jumpTo(step) {
         this.setState({
-          stepNumber: step,
-          xIsNext: (step % 2) === 0,
+            stepNumber: step,
+            xIsNext: (step % 2) === 0,
         });
-      }
+    }
     handleClick2(i) {
         const history = this.state.history.slice(0, this.state.stepNumber + 1);
         const current = history[this.state.stepNumber];
         const squares = current.squares.slice();
         if (calculateWinner(squares) || squares[i]) {
-          return;
+            return;
         }
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history: history.concat([{
                 squares: squares,
-              }]),
-              stepNumber: history.length,
-          xIsNext: !this.state.xIsNext,
+            }]),
+            stepNumber: history.length,
+            xIsNext: !this.state.xIsNext,
+            lastSelectedButton :i,
         });
     }
 
@@ -80,18 +81,19 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[history.length - 1];
         const winner = calculateWinner(current.squares);
+        const cord = getCordinates(this.lastSelectedButton);
         const moves = history.map((step, move) => {
-            console.log ("---");
-            console.log (step + "  -  " + move);
+            console.log("---");
+            console.log(step + "  -  " + move);
             const desc = move ?
-              'Go to move #' + move :
-              'Go to game start';
+                'Go to move #' + move  + ' cordinates ' + cord:
+                'Go to game start';
             return (
                 <li key={move}>
-                <button onClick={() => this.jumpTo(move)}>{desc}</button>
-              </li>
+                    <button onClick={() => this.jumpTo(move)}>{desc}</button>
+                </li>
             );
-          });
+        });
         let status;
         if (winner) {
             status = 'Winner: ' + winner;
@@ -102,10 +104,10 @@ class Game extends React.Component {
         return (
             <div className="game">
                 <div className="game-board">
-                    <Board squares={current.squares} onClick={(i) => this.handleClick2(i)}/>
+                    <Board squares={current.squares} onClick={(i) => this.handleClick2(i)} />
                 </div>
                 <div className="game-info">
-                    <div>{status }</div>
+                    <div>{status}</div>
                     <ol>{moves}</ol>
                 </div>
             </div>
@@ -119,6 +121,24 @@ ReactDOM.render(
     <Game />,
     document.getElementById('root')
 );
+
+function getCordinates(i) {
+    //Question  how do you move this to the top /class lever
+    const cordinates = new Map();
+    cordinates.set(0, '[0, 0]');
+    cordinates.set(1, '[1, 0]');
+    cordinates.set(2, '[2, 0]');
+
+    cordinates.set(3, '[0, 1]');
+    cordinates.set(4, '[1, 1]');
+    cordinates.set(5, '[2, 2]');
+
+    cordinates.set(6, '[0, 2]');
+    cordinates.set(7, '[1, 2]');
+    cordinates.set(8, '[2, 2]');
+
+    return cordinates.get(i);
+}
 
 function calculateWinner(squares) {
     const lines = [
