@@ -46,11 +46,10 @@ class Game extends React.Component {
         super(props);
         this.state = {
             history: [{
-                squares: Array(9).fill(null),
+                squares: Array(9).fill(null), lastSelectedButton : -1,
             }],
             stepNumber: 0,
             xIsNext: true,
-            lastSelectedButton : -1,
         };
     }
     jumpTo(step) {
@@ -69,11 +68,11 @@ class Game extends React.Component {
         squares[i] = this.state.xIsNext ? 'X' : 'O';
         this.setState({
             history: history.concat([{
-                squares: squares,
+                squares: squares,lastSelectedButton: i,
             }]),
             stepNumber: history.length,
             xIsNext: !this.state.xIsNext,
-            lastSelectedButton :i,
+            
         });
     }
 
@@ -81,10 +80,11 @@ class Game extends React.Component {
         const history = this.state.history;
         const current = history[history.length - 1];
         const winner = calculateWinner(current.squares);
-        const cord = getCordinates(this.lastSelectedButton);
+        
         const moves = history.map((step, move) => {
             console.log("---");
             console.log(step + "  -  " + move);
+            const cord = getCordinates(step.lastSelectedButton);
             const desc = move ?
                 'Go to move #' + move  + ' cordinates ' + cord:
                 'Go to game start';
@@ -131,7 +131,7 @@ function getCordinates(i) {
 
     cordinates.set(3, '[0, 1]');
     cordinates.set(4, '[1, 1]');
-    cordinates.set(5, '[2, 2]');
+    cordinates.set(5, '[2, 1]');
 
     cordinates.set(6, '[0, 2]');
     cordinates.set(7, '[1, 2]');
