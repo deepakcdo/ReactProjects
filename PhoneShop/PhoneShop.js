@@ -22,6 +22,29 @@ function bankBalance1(a, b) {
 bankBalance1(4, 5);
 
 function startJS() {
+// question difference between new String("33") and String("33")
+    console.log((new  String("33")).toString());
+
+    console.log(typeof (String("33")));
+    console.log(typeof (new String("33")));
+
+//     var hell= "hello";
+//     var r = ~hell.indexOf('l');
+//     console.log(r);
+//   var testa = {
+//       b:42,
+//       c: "42",
+//       d: [1,2,3]
+//   }
+//   var result = JSON.stringify(testa, function(k,v){
+//       return v;
+
+//   },"-----------")
+//   console.log("total result = " + result);
+}
+
+function startJS1() {
+    // Qustions Check why this does not work Types and grammer chapter 3  - Native Prototypes
     console.log(Array.prototype);
 
     var ages = ages || Array.prototype;
