@@ -1,0 +1,1 @@
+Run "create-react-app burger-builder" from the parent folder. It will create a folder and pu the package.json in there.

@@ -16,31 +16,73 @@ function calculateCostOfPhone() {
 function bankBalance1(a, b) {
     console.log(a + b + name);
 }
+function *foo() {
+    a++;
+ yield;
+    b = b * a;
+    a = (yield b) + 3;
+}
 
+function* bar() {
+    b--;
+    yield;
+    a = (yield 8) + b;
+    b = a * (yield 2);
+}
+function step(gen) {
+    var it = gen();
+    var last;
 
+    return function () {
+        // whatever is `yield`ed out, just
+        // send it right back in the next time!
+        last = it.next(last).value;
+    };
+}
 
 bankBalance1(4, 5);
 
 function startJS() {
-// question difference between new String("33") and String("33")
-    console.log((new  String("33")).toString());
+    a = 1;
+    b = 2;
+
+    var s1 = step(foo);
+    var s2 = step(bar);
+
+    // run `*foo()` completely first
+    s1();
+    s1();
+    s1();
+    console.log(a, b);
+    // now run `*bar()`
+    s2();
+    s2();
+    s2();
+    s2();
+    foo();
+
+    console.log(a, b);	// 11 22
+}
+function test() {
+    // question difference between new String("33") and String("33")
+    console.log((new String("33")).toString());
 
     console.log(typeof (String("33")));
     console.log(typeof (new String("33")));
 
-//     var hell= "hello";
-//     var r = ~hell.indexOf('l');
-//     console.log(r);
-//   var testa = {
-//       b:42,
-//       c: "42",
-//       d: [1,2,3]
-//   }
-//   var result = JSON.stringify(testa, function(k,v){
-//       return v;
+    //     var hell= "hello";
+    //     var r = ~hell.indexOf('l');
+    //     console.log(r);
+    //   var testa = {
+    //       b:42,
+    //       c: "42",
+    //       d: [1,2,3]
+    //   }
+    //   var result = JSON.stringify(testa, function(k,v){
+    //       return v;
 
-//   },"-----------")
-//   console.log("total result = " + result);
+    //   },"-----------")
+    //   console.log("total result = " + result);
 }
 
 function startJS1() {
