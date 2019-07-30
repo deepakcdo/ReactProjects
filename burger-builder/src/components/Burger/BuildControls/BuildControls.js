@@ -1,20 +1,15 @@
 import React from 'react';
 import BuilderControlsCss from './BuildControls.css'
 import BuilderControl from './BuilderControl/BuildControl'
-import BurgerIngredient from "../BurgerIngredient/BurgerIngredient";
-
-const controls = [
-    {label: 'Salad', type: 'salad'},
-    {label: 'Bacon', type: 'bacon'},
-    {label: 'Meat', type: 'meat'},
-    {label: 'Cheese', type: 'cheese'}
-]
+import controls from '../Ingredients'
 
 const builderControls = (props) => {
 
     return (<div className={BuilderControlsCss.BuildControls}>
         {controls.map((item, indx) => (
-            <BuilderControl label={item.label} key={item.label + '_' + indx}/>
+            <BuilderControl label={item.label}
+                            key={item.label + '_' + indx}
+                            added={() => props.ingredientsAdded(item.type)}/>
         ))}
     </div>)
 }

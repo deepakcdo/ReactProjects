@@ -7,7 +7,7 @@ const builderControl = (props) => {
         <div className={BuilderControlCss.BuildControl}>
             <div className={BuilderControlCss.Label}>{props.label}</div>
             <button className={BuilderControlCss.Less}>Less</button>
-            <button className={BuilderControlCss.More}>More</button>
+            <button  onClick={props.added} className={BuilderControlCss.More}>More</button>
         </div>
     );
 }
