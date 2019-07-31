@@ -10,6 +10,7 @@ class BurgerBuilder extends Component{
         ingredients: {
             salad:1,
             cheese:1,
+            bacon:1,
             meat: 1
         },
         totalPrice:4
@@ -32,7 +33,7 @@ class BurgerBuilder extends Component{
        return <Auxx>
            <Burger ingredients={this.state.ingredients}/>
            <BurgerControls
-               ingredientsAdded = {this.addIngredientHandler()}/>
+               ingredientsAdded = {this.addIngredientHandler}/>
        </Auxx>;
     };
 }
