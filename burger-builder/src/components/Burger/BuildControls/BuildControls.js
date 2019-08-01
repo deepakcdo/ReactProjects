@@ -9,7 +9,10 @@ const builderControls = (props) => {
         {controls.map((item, indx) => (
             <BuilderControl label={item.label}
                             key={item.label + '_' + indx}
-                            added={() => props.ingredientsAdded(item.type)}/>
+                            price={item.price}
+                            added={() => props.ingredientsAdded(item.type)}
+                            removed={() => props.ingredidentsRemoved(item.type)}
+                            disabled={props.disabled[item.type]}/>
         ))}
     </div>)
 }

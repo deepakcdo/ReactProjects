@@ -29,6 +29,7 @@ const burger = (props) => {
         {emptyBurger === true ? <div></div>:
             <div>The Burger is looking tasty looking burger !!!!</div>
         }
+        <div className={BurgerCss.Price}>Total price £ {props.price.toFixed(2)} Only !!!!</div>
     </div>
 }
 export default burger;
