@@ -15,7 +15,9 @@ const builderControls = (props) => {
                             removed={() => props.ingredidentsRemoved(item.type)}
                             disabled={props.disabled[item.type]}/>
         ))}
-        <button className={BuilderControlsCss.OrderButton} disabled={!props.purchasable}>ORDER NOW</button>
+        <button className={BuilderControlsCss.OrderButton}
+                onClick={props.purchaseHandler}
+                disabled={!props.purchasable}>ORDER NOW</button>
     </div>)
 }
 export default builderControls;
