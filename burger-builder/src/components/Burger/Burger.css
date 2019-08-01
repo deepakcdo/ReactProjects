@@ -7,9 +7,6 @@
     font-weight: bold;
     font-size: 1.2rem
 }
-.Price{
-    color: crimson;
-}
 @media (min-width: 500px) and (min-height: 400px) {
     .Burger {
         width: 350px;

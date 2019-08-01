@@ -6,6 +6,7 @@ import controls from '../Ingredients'
 const builderControls = (props) => {
 
     return (<div className={BuilderControlsCss.BuildControls}>
+        <div className={BuilderControlsCss.Price}>Total price £ {props.price.toFixed(2)} Only !!!!</div>
         {controls.map((item, indx) => (
             <BuilderControl label={item.label}
                             key={item.label + '_' + indx}
@@ -14,6 +15,7 @@ const builderControls = (props) => {
                             removed={() => props.ingredidentsRemoved(item.type)}
                             disabled={props.disabled[item.type]}/>
         ))}
+        <button className={BuilderControlsCss.OrderButton} disabled={!props.purchasable}>ORDER NOW</button>
     </div>)
 }
 export default builderControls;
