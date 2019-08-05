@@ -1,5 +1,6 @@
 import React from 'react';
 import Auxx from "../../../hoc/Auxx";
+import Button from "../../UI/Button/Button";
 
 
 const orderSummary = (props) => {
@@ -19,10 +20,11 @@ const orderSummary = (props) => {
             <ul>
                 {map}
             </ul>
+            <p><strong>Total Price £ {props.price.toFixed(2)}</strong></p>
+            <p> Continue to checkout?</p>
+            <Button clicked={props.cancelPurchase} btnType="Danger">Cancel</Button>
+            <Button clicked={props.continuePurchase} btnType="Success">Order</Button>
         </Auxx>
-
     );
-
-
 }
 export default orderSummary;
