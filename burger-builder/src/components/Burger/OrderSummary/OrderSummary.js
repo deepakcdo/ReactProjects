@@ -8,12 +8,19 @@ const orderSummary = (props) => {
     let map = Object.keys(props.ingredients).map(key => {
         let count = props.ingredients[key];
         if (count > 0) {
-            return <li key={key}><span style={{textTransform: 'capitalize'}}>{key} </span>: {props.ingredients[key]}</li>
+            return <li key={key}><span style={{textTransform: 'capitalize'}}>{key} </span>: {props.ingredients[key]}
+            </li>
         }
 
     });
 
+    function both(fun1, fun2) {
+        fun1();
+        fun2();
+    }
+
     return (
+
         <Auxx>
             <h3> Order Summary</h3>
             <p> You have ordered a delicious burger with :</p>
@@ -23,7 +30,7 @@ const orderSummary = (props) => {
             <p><strong>Total Price £ {props.price.toFixed(2)}</strong></p>
             <p> Continue to checkout?</p>
             <Button clicked={props.cancelPurchase} btnType="Danger">Cancel</Button>
-            <Button clicked={props.continuePurchase} btnType="Success">Order</Button>
+            <Button clicked={() => both(props.cancelPurchase, props.continuePurchase)} btnType="Success">Order</Button>
         </Auxx>
     );
 }
