@@ -14,7 +14,6 @@ const burger = (props) => {
           return previousValue.concat(currentValue);
         }, []);
 
-    console.log(ingredientsToAdd);
     let emptyBurger = false;
     if (ingredientsToAdd.length === 0) {
         ingredientsToAdd = <p>Please add some ingredients !!</p>

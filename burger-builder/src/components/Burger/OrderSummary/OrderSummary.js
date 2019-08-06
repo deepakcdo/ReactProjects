@@ -1,37 +1,46 @@
 import React from 'react';
-import Auxx from "../../../hoc/Auxx";
+import Auxx from "../../../hoc/Auxx/Auxx";
 import Button from "../../UI/Button/Button";
 
 
-const orderSummary = (props) => {
+class OrderSummary extends React.Component {
 
-    let map = Object.keys(props.ingredients).map(key => {
-        let count = props.ingredients[key];
-        if (count > 0) {
-            return <li key={key}><span style={{textTransform: 'capitalize'}}>{key} </span>: {props.ingredients[key]}
-            </li>
-        }
-
-    });
-
-    function both(fun1, fun2) {
-        fun1();
-        fun2();
+    componentWillUpdate(nextProps, nextState, nextContext) {
+        console.log('[OrderSummary] componentWillUpdate')
     }
 
-    return (
+    render() {
 
-        <Auxx>
-            <h3> Order Summary</h3>
-            <p> You have ordered a delicious burger with :</p>
-            <ul>
-                {map}
-            </ul>
-            <p><strong>Total Price £ {props.price.toFixed(2)}</strong></p>
-            <p> Continue to checkout?</p>
-            <Button clicked={props.cancelPurchase} btnType="Danger">Cancel</Button>
-            <Button clicked={() => both(props.cancelPurchase, props.continuePurchase)} btnType="Success">Order</Button>
-        </Auxx>
-    );
+        let map = Object.keys(this.props.ingredients).map(key => {
+            let count = this.props.ingredients[key];
+            if (count > 0) {
+                return <li key={key}><span style={{textTransform: 'capitalize'}}>{key} </span>: {this.props.ingredients[key]}
+                </li>
+            }
+            return null;
+        });
+
+        function both(fun1, fun2) {
+            fun1();
+            fun2();
+        }
+
+        return (
+
+            <Auxx>
+                <h3> Order Summary</h3>
+                <p> You have ordered a delicious burger with :</p>
+                <ul>
+                    {map}
+                </ul>
+                <p><strong>Total Price £ {this.props.price.toFixed(2)}</strong></p>
+                <p> Continue to checkout?</p>
+                <Button clicked={this.props.cancelPurchase} btnType="Danger">Cancel</Button>
+                <Button clicked={() => both(this.props.cancelPurchase, this.props.continuePurchase)}
+                        btnType="Success">Order</Button>
+            </Auxx>
+        );
+    }
 }
-export default orderSummary;
+
+export default OrderSummary;
