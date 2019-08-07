@@ -2,6 +2,7 @@ import React from 'react';
 import BuilderControlsCss from './BuildControls.css'
 import BuilderControl from './BuilderControl/BuildControl'
 import controls from '../Ingredients'
+import Footer from "./Footer";
 
 const builderControls = (props) => {
 
@@ -18,6 +19,7 @@ const builderControls = (props) => {
         <button className={BuilderControlsCss.OrderButton}
                 onClick={props.purchaseHandler}
                 disabled={!props.purchasable}>ORDER NOW</button>
+        <Footer name={"Burger Builder"} JustEat Deliveroo></Footer>
     </div>)
 }
 export default builderControls;
