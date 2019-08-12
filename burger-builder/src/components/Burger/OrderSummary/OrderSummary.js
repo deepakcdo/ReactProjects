@@ -21,7 +21,7 @@ class OrderSummary extends React.Component {
         });
 
         function both(fun1, fun2) {
-            fun1();
+            //fun1();
             fun2();
         }
 
