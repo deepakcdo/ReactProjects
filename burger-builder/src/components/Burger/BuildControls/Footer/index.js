@@ -4,6 +4,6 @@ import React from 'react';
 
 export default function Footer({name, ...props}){
     return <div>
-        <div style={{color: 'blue'}}><strong>{name} will deliver faster then {Object.keys(props).join(' and ')} !!! </strong></div>
+        <div style={{color: 'blue'}}><strong>{name} will deliver faster then {Object.keys(props).join(' and ')} to your Inbox !!! </strong></div>
     </div>
 }

@@ -17,12 +17,13 @@ class App extends React.Component {
     //         this.setState({showBurgerBuilder: false})
     //     }, 5000);
     // }
+    //() => this.state.showBurgerBuilder ? <BurgerBuilder/> : null
     render() {
         return <div>
             <Layout>
                 <Switch>
                     <Route path='/checkout' component={Checkout}/>
-                    <Route path='/' component={() => this.state.showBurgerBuilder ? <BurgerBuilder/> : null}/>
+                    <Route path='/' component={BurgerBuilder}/>
                 </Switch>
             </Layout>
 
