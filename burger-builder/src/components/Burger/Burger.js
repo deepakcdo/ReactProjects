@@ -26,7 +26,7 @@ const burger = (props) => {
         {ingredientsToAdd}
         <BurgerIngredient type={"burger-bottom"}/>
         {emptyBurger === true ? <div></div>:
-            <div>The Burger is looking tasty looking burger !!!!</div>
+            <div>Great Work !!!!</div>
         }
     </div>
 }
