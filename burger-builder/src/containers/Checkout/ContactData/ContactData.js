@@ -18,7 +18,8 @@ export default class ContactData extends React.Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             street: {
                 elementType: 'input',
@@ -30,7 +31,8 @@ export default class ContactData extends React.Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             postCode: {
                 elementType: 'input',
@@ -44,7 +46,8 @@ export default class ContactData extends React.Component {
                     minLength: 5,
                     maxLength: 5
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             country: {
                 elementType: 'input',
@@ -56,7 +59,8 @@ export default class ContactData extends React.Component {
                 validation: {
                     required: true
                 },
-                valid: false
+                valid: false,
+                touched: false
             },
             email: {
                 elementType: 'input',
@@ -78,31 +82,40 @@ export default class ContactData extends React.Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: '',
+                value: 'fastest',
                 valid: true
             },
-        }
+        },
+        validForm: false
     }
 
     handleChanged = (event, inputID) => {
         const updatedOrderForm = {...this.state.orderForm};
         const updatedFormElement = {...updatedOrderForm[inputID]};
         updatedFormElement.value = event.target.value;
+        updatedFormElement.touched = true;
         updatedFormElement.valid = this.checkValid(event.target.value, updatedFormElement.validation);
         updatedOrderForm[inputID] = updatedFormElement;
-        console.log(updatedFormElement);
-        this.setState({orderForm: updatedOrderForm});
+        let validForm = true;
+        for(let item in updatedOrderForm){
+            validForm = updatedOrderForm[item].valid && validForm;
+        }
+        console.log(validForm);
+        this.setState({orderForm: updatedOrderForm, validForm:validForm});
     }
 
-    checkValid(value, checks){
+    checkValid(value, checks) {
         let isValid = true;
-        if (checks.required){
-            isValid = value.trim() !=="" && isValid;
+        if (!checks){
+            return true;
         }
-        if (checks.minLength){
+        if (checks.required) {
+            isValid = value.trim() !== "" && isValid;
+        }
+        if (checks.minLength) {
             isValid = value.trim().length >= checks.minLength && isValid;
         }
-        if (checks.maxLength){
+        if (checks.maxLength) {
             isValid = value.trim().length <= checks.maxLength && isValid;
         }
         return isValid;
@@ -152,10 +165,13 @@ export default class ContactData extends React.Component {
                         elementType={item.data.elementType}
                         elementConfig={item.data.elementConfig}
                         value={item.data.value}
+                        touched={item.data.touched}
+                        invalid={!item.data.valid}
+                        shouldValidate={item.data.validation}
                         changed={(event) => this.handleChanged(event, item.id)}/>
                 })
             }
-            <Button btnType="Success">ORDER</Button>
+            <Button btnType="Success" disabled={!this.state.validForm}>ORDER</Button>
         </form>);
         if (this.state.loading) {
             form = <Spinner text="Placing Order!!!"/>
