@@ -1,5 +1,6 @@
 import * as actionTypes from '../actions/actionsTypes';
 import Ingredients from '../../components/Burger/Ingredients'
+import {updateObject} from "../utility";
 
 const initialState = {
     ingredients: null,
@@ -21,14 +22,15 @@ function getPriceForIngredient(requiredType) {
 const burgerbuilder = (state = initialState, action) => {
     switch (action.type) {
         case actionTypes.ADD_INGREDIENT:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
+            // only doing one here so we can see the old code
+            const ingredients = updateObject(state.ingredients,
+                {[action.ingredientName]: state.ingredients[action.ingredientName] + 1});
+
+            return updateObject(state, {
+                ingredients:ingredients,
                 totalPrice: state.totalPrice + getPriceForIngredient(action.ingredientName)
-            }
+            });
+
         case actionTypes.REMOVE_INGREDIENT:
             return {
                 ...state,
@@ -55,6 +57,7 @@ const burgerbuilder = (state = initialState, action) => {
                     cheese: action.ingredients.cheese,
                     meat: action.ingredients.meat,
                 },
+                totalPrice: 4,
                 error: false
             }
 

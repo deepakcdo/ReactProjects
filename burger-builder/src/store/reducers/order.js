@@ -1,4 +1,5 @@
 import * as actionTypes from '../actions/actionsTypes'
+import {updateObject} from "../utility";
 
 const initState = {
     orders: [],
@@ -9,32 +10,40 @@ const initState = {
 const reducers = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.PURCHASE_BURGER_SCUCCESS:
-            const newOrder = {
-                ...action.orderData,
+            const newOrder = updateObject(action.orderData,{
                 id: action.orderId
-            }
-            return {
-                ...state,
+            });
+            return updateObject( state,{
                 loading: false,
                 purchased:true,
                 orders: state.orders.concat(newOrder)
 
-            }
+            });
         case actionTypes.PURCHASE_BURGER_FAILED:
-            return {
-                ...state,
+            return updateObject( state,{
                 loading: false,
-            }
+            });
         case actionTypes.PURCHASE_BURGER_START:
-            return {
-            ...state,
+            return updateObject( state,{
             loading: true,
-        }
+            });
         case actionTypes.PURCHASE_INIT:
-            return {
-                ...state,
+            return updateObject( state,{
                 purchased: false,
-            }
+            });
+        case actionTypes.FETCH_ORDERS_FAIL:
+            return updateObject( state,{
+                loading: true,
+            });
+        case actionTypes.FETCH_ORDERS_SUCCESS:
+            return updateObject( state,{
+                loading: false,
+                orders:action.orders,
+            });
+        case actionTypes.FETCH_ORDERS_START:
+            return updateObject( state,{
+                loading: true,
+            });
         default:
             return state
     }
