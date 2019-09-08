@@ -5,8 +5,10 @@ import axiosOrders from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import {connect} from "react-redux";
+import withErrorHandler from "../../../hoc/withErrorHandler/withErrorHandler";
+import * as burgerBuilderActions from "../../../store/actions";
 
- class ContactData extends React.Component {
+class ContactData extends React.Component {
     state = {
         orderForm: {
             name: {
@@ -98,16 +100,16 @@ import {connect} from "react-redux";
         updatedFormElement.valid = this.checkValid(event.target.value, updatedFormElement.validation);
         updatedOrderForm[inputID] = updatedFormElement;
         let validForm = true;
-        for(let item in updatedOrderForm){
+        for (let item in updatedOrderForm) {
             validForm = updatedOrderForm[item].valid && validForm;
         }
         console.log(validForm);
-        this.setState({orderForm: updatedOrderForm, validForm:validForm});
+        this.setState({orderForm: updatedOrderForm, validForm: validForm});
     }
 
     checkValid(value, checks) {
         let isValid = true;
-        if (!checks){
+        if (!checks) {
             return true;
         }
         if (checks.required) {
@@ -124,8 +126,6 @@ import {connect} from "react-redux";
 
     handleOrderButton = (event) => {
         event.preventDefault();
-        // // alert('Yes Go on !!!!')
-        this.setState({loading: true});
 
         const formData = {};
         for (let item in this.state.orderForm) {
@@ -137,16 +137,7 @@ import {connect} from "react-redux";
             price: this.props.price,
             customer: formData
         }
-
-        axiosOrders.post("orders.json", order)
-            .then(ok => {
-                this.setState({loading: false});
-                console.log(ok);
-                this.props.history.push("/")
-            }).catch(error => {
-            this.setState({loading: false});
-            console.log(error)
-        });
+        this.props.onPlaceOrder(order);
     }
 
     render() {
@@ -174,7 +165,7 @@ import {connect} from "react-redux";
             }
             <Button btnType="Success" disabled={!this.state.validForm}>ORDER</Button>
         </form>);
-        if (this.state.loading) {
+        if (this.props.loading) {
             form = <Spinner text="Placing Order!!!"/>
         }
         return (<div className={ContactDataCss.ContactData}>
@@ -185,11 +176,17 @@ import {connect} from "react-redux";
     }
 }
 
-const mapStateToProps = state =>
-{
-    return{
-        ings: state.ingredients,
-        price: state.totalPrice
+const mapStateToProps = state => {
+    return {
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        loading:state.order.loading
     }
 }
-export default connect(mapStateToProps)(ContactData)
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPlaceOrder: (order) => dispatch(burgerBuilderActions.purchaesBurger(order))
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, axiosOrders))

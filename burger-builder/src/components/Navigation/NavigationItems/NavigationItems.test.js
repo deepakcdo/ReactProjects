@@ -8,7 +8,7 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 configure({adapter: new Adapter()});
 
 describe('<NavigationItems />', () => {
-    var wrapper;
+    let wrapper;
     beforeEach(()=>{
          wrapper = shallow(<NavigationItems/>);
     });
@@ -20,5 +20,10 @@ describe('<NavigationItems />', () => {
     it ('Should render 3 <NavigationItem /> elements if authenticated', ()=> {
         wrapper.setProps({isAuthenticated: true})
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
+    });
+
+    it ('Should logout  <NavigationItem /> elements if authenticated', ()=> {
+        wrapper.setProps({isAuthenticated: true})
+        expect(wrapper.contains(<NavigationItem link="/Sign" >Orders </NavigationItem>)).toEqual(true);
     });
 });
