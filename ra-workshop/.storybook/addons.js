@@ -2,7 +2,7 @@ import { addDecorator, addParameters } from "@storybook/react";
 
 // theming:
 
-/*
+
 
 import tokens from "../src/lessons/13/components/theme";
 import { create } from "@storybook/theming";
@@ -21,17 +21,17 @@ addParameters({
   options: { theme }
 });
 
-*/
+
 
 // responsive;
 
-/*
+
 import "@storybook/addon-viewport/register";
-*/
+
 
 // accessibility;
 
-/*
+
 
 import "@storybook/addon-a11y/register";
 import { withA11y } from "@storybook/addon-a11y";
@@ -45,4 +45,4 @@ addParameters({
   ]
 });
 
-*/
+

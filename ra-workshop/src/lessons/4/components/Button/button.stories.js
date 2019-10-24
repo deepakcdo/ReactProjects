@@ -6,7 +6,7 @@ export default {
   title: "Button"
 };
 
-export const all = () => (
+export const all_new = () => (
   <>
     <div>{primary()}</div>
     <br />

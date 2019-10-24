@@ -12,7 +12,7 @@ export default {
 
 export const simple = () => (
   <ThemeProvider>
-    <Shot prop1="something" prop2="something" />
+    <Shot prop1="something" prop2="something" props4="new text" />
   </ThemeProvider>
 );
 

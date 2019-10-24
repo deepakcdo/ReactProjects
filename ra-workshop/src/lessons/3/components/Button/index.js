@@ -3,12 +3,14 @@ import "./button.scss";
 
 function Button(props) {
   return (
-    <button className={`btn`} disabled={props.disabled} {...props}>
+    <button className={`btn ${props.variant}`} disabled={props.disabled} {...props}>
       {props.children}
     </button>
   );
 }
 
-Button.defaultProps = {};
+Button.defaultProps = {
+  variant:"primary"
+};
 
 export { Button };
