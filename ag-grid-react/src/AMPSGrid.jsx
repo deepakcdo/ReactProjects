@@ -108,15 +108,15 @@ export default class AMPSGrid extends Component {
     render() {
         return (
             <div>
-                <div>
-                    <h1 id="header"> <img src="/assets/img/logo.png" id="logo" /> AMPS ag-grid React Demo</h1>
-                    <button id="populate-sow" onClick={this.handlePopulateSOW.bind(this)}>Re-Populate SOW</button>
-                    <input 
-                        type="checkbox" 
-                        id="randomizer" 
-                        onClick={this.handleRandomDataUpdates.bind(this)} 
-                    />Send Random Updates<br />
-                </div>
+               {/*<div>*/}
+               {/*     <h1 id="header"> <img src="/assets/img/logo.png" id="logo" /> AMPS ag-grid React Demo</h1>*/}
+               {/*     <button id="populate-sow" onClick={this.handlePopulateSOW.bind(this)}>Re-Populate SOW</button>*/}
+               {/*     <input*/}
+               {/*         type="checkbox"*/}
+               {/*         id="randomizer"*/}
+               {/*         onClick={this.handleRandomDataUpdates.bind(this)}*/}
+               {/*     />Send Random Updates<br />*/}
+               {/* </div>*/}
 
                 <QueryControls 
                     onInit={this.handleOnControlsInit.bind(this)}  

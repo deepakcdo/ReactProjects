@@ -11,8 +11,8 @@ self.addEventListener('message', function(event) {
     var client = new Client('sow-loader-' + new Date() + '-' + Math.random() * 100000000);
     client.errorHandler(function(err) { self.postMessage({error: err}); });
 
-    // let's go!
-    client.connect('ws://localhost:9000/amps/json')
+    // let's go!tcp://192.168.56.101:8001/amps/json
+    client.connect('ws://192.168.56.101:8008/amps/json')
         .then(function() {
             var nextId = 1;
             var sowKeyMap;
