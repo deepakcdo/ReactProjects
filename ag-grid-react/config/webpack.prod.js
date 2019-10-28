@@ -18,7 +18,7 @@ module.exports = {
 
     resolve: {
         alias: {
-            "ag-grid-root" : "../node_modules/ag-grid"
+            "ag-grid-root" : "../node_modules/ag-grid-community"
         },
         extensions: ['.js', '.jsx']
     },

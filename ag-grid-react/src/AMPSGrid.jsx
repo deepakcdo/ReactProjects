@@ -69,29 +69,29 @@ export default class AMPSGrid extends Component {
                 if (event.data.p !== undefined) {
                     rowNode = this.gridApi.updateRowData({add: [event.data.p]}).add[0];
                     rowIndex = rowNode.rowIndex;
-                    rowNode.setSelected(true);
+                    // rowNode.setSelected(true);
                 }
                 // update to existing record
                 else if (event.data.u !== undefined ) {
                     rowNode = this.gridApi.getRowNode(event.data.u.order_id);
                     rowNode.setData(event.data.u);
-                    rowNode.setSelected(true);
+                    // rowNode.setSelected(true);
                     rowIndex = rowNode.rowIndex;
                 }
                 // record was deleted
                 else if (event.data.oof !== undefined) {
                     rowNode = this.gridApi.getRowNode(event.data.oof.order_id);
                     this.gridApi.ensureIndexVisible(rowNode.rowIndex);
-                    rowNode.setSelected(true);
+                    // rowNode.setSelected(true);
                     setTimeout(function() {
                         this.gridApi.removeItems([rowNode]);
                         rowIndex = null;
                     }, 500);
                 }
 
-                if (rowIndex >= 0) {
-                    this.gridApi.ensureIndexVisible(rowIndex);
-                }
+                // if (rowIndex >= 0) {
+                //     this.gridApi.ensureIndexVisible(rowIndex);
+                // }
             }
         }).bind(this);
     }
@@ -125,6 +125,18 @@ export default class AMPSGrid extends Component {
 
                 <div id="ag-grid" className="ag-fresh">
                     <AgGridReact
+                        gridOptions = {{
+                            getRowNodeId: function (inputData) {
+                                return inputData.ID;
+                            }
+                        }}
+                        defaultColDef={{
+                            sortable: true,
+                            resizable: true,
+                            enableCellChangeFlash: true,
+                            editable: true,
+                            valueSetter: this.submitEdit
+                        }}
                         columnDefs={this.state.columnDefs}
                         rowData={this.state.rowData}
                         onGridReady={this.handleOnGridReady.bind(this)} 

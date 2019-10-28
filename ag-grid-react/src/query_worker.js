@@ -1,4 +1,5 @@
 import { Client } from 'amps';
+import {AMPS_SERVER} from "./constants";
 
 var data;
 
@@ -11,8 +12,8 @@ self.addEventListener('message', function(event) {
     var client = new Client('sow-loader-' + new Date() + '-' + Math.random() * 100000000);
     client.errorHandler(function(err) { self.postMessage({error: err}); });
 
-    // let's go!tcp://192.168.56.101:8001/amps/json
-    client.connect('ws://192.168.56.101:8008/amps/json')
+    // let's go!
+    client.connect(AMPS_SERVER)
         .then(function() {
             var nextId = 1;
             var sowKeyMap;
