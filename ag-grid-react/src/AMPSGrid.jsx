@@ -73,14 +73,14 @@ export default class AMPSGrid extends Component {
                 }
                 // update to existing record
                 else if (event.data.u !== undefined ) {
-                    rowNode = this.gridApi.getRowNode(event.data.u.order_id);
+                    rowNode = this.gridApi.getRowNode(event.data.u.ID);
                     rowNode.setData(event.data.u);
                     // rowNode.setSelected(true);
                     rowIndex = rowNode.rowIndex;
                 }
                 // record was deleted
                 else if (event.data.oof !== undefined) {
-                    rowNode = this.gridApi.getRowNode(event.data.oof.order_id);
+                    rowNode = this.gridApi.getRowNode(event.data.oof.ID);
                     this.gridApi.ensureIndexVisible(rowNode.rowIndex);
                     // rowNode.setSelected(true);
                     setTimeout(function() {
